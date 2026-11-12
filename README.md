@@ -38,6 +38,14 @@ Backgrounds: DotGrid, LightRays, Threads.
 Text: SplitText, BlurText, ShinyText, RotatingText, DecryptedText, TextType, CountUp, ScrollReveal, ScrollVelocity.
 Motion and surfaces: AnimatedContent, FadeContent, ClickSpark, Magnet, StarBorder, SpotlightCard, BorderGlow.
 
+## SEO
+
+Search and sharing details live in `seo.config.ts`. At build time they become the page title, description, Open Graph and Twitter tags, JSON-LD (`Person`, `ProfilePage`, `WebSite`), a no-JavaScript fallback, and `robots.txt`.
+
+Set `siteUrl` there (or build with `SITE_URL=https://your-domain npm run build`) once the site has an address. That turns on the canonical link, `sitemap.xml`, and absolute URLs for the share image, which social previews need.
+
+The share image is `public/og.png` (1200×630).
+
 ## Lighthouse
 
 Reports from the production build live in `lighthouse/` (`mobile.report.html`, `desktop.report.html`). To regenerate them, build and serve the production bundle, then run Lighthouse against it:
