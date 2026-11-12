@@ -1,0 +1,19 @@
+# Vishwa Gaurav Shukla
+
+> Portfolio of Vishwa Gaurav Shukla, a full-stack software engineer who builds scalable web applications and AI-powered products with React, Next.js, Node.js and Azure.
+
+This is a single-page site. Each section below is an anchor on the home page.
+
+## Sections
+
+- [About](/#about): Professional summary and focus areas
+- [Work](/#work): Experience at 98thPercentile, with measured outcomes
+- [Claude Code](/#claude): How AI-assisted development fits into daily engineering work
+- [Projects](/#projects): Side projects
+- [Skills](/#skills): Technical skills and education
+- [Contact](/#contact): Email and LinkedIn
+
+## Links
+
+- [LinkedIn](https://www.linkedin.com/in/vgs-profile): Professional profile
+- [Résumé (PDF)](/Vishwa-Gaurav-Shukla-Resume.pdf): Downloadable résumé
