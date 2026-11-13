@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import ClickSpark from '@/components/reactbits/ClickSpark';
 import Hero from '@/components/sections/Hero';
 import Nav from '@/components/sections/Nav';
@@ -64,6 +65,7 @@ export default function App() {
           </Suspense>
         ))}
       </main>
+      <Analytics />
     </ClickSpark>
   );
 }
