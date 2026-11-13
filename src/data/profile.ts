@@ -97,7 +97,7 @@ export const work: WorkItem[] = [
       'Program-wise feedback',
       'Presentation assessment',
     ],
-    tags: ['Node.js', 'Express', 'OpenAI API', 'Prompt Engineering', 'React'],
+    tags: ['Node.js', 'Express', 'Azure OpenAI', 'Prompt Engineering', 'React'],
   },
   {
     title: 'Scheduling & teacher allotment',
@@ -111,7 +111,7 @@ export const work: WorkItem[] = [
     body: 'Architected and deployed SSO across cross-platform microservices, and redesigned RBAC around a four-level permission hierarchy for granular admin control.',
     metrics: [
       { value: '−35%', label: 'login latency' },
-      { value: '−60%', label: 'unauthorized access incidents' },
+      { value: '0%', label: 'unauthorized access incidents' },
     ],
     tags: ['Azure SSO', 'JWT HS-256 / RS-256', 'RBAC'],
   },
@@ -129,7 +129,7 @@ export const work: WorkItem[] = [
       { value: '+45%', label: 'task completion speed' },
       { value: '+30%', label: 'user engagement' },
     ],
-    tags: ['React', 'LLM Integration', 'OpenAI API'],
+    tags: ['React', 'LLM Integration', 'Azure OpenAI'],
   },
   {
     title: 'Shared design system',
@@ -193,18 +193,18 @@ export const claude = {
     { value: 9, label: 'Codebases' },
   ] satisfies Stat[],
   prompts: [
-    'review this PR as a senior developer',
-    'plan the user story and tasks from this spec',
-    'resolve the build errors',
-    'audit the dependencies, then upgrade safely',
+    'Review this PR as a senior engineer. Check auth edge cases, error handling and query cost, then rank findings by severity with file and line.',
+    'Read the spec and break it into a user story with acceptance criteria and sized tasks. Flag open questions before estimating anything.',
+    'The CI build is failing. Reproduce it locally, find the root cause and fix it without loosening types, then run lint and the test suite.',
+    'Audit the dependencies for vulnerabilities and breaking changes. Upgrade one major version at a time and verify the build after each.',
   ],
   toolMix: [
-    { name: 'Bash', share: 48.2 },
-    { name: 'Edit', share: 21.4 },
-    { name: 'Read', share: 16.5 },
-    { name: 'MCP tools', share: 8.2 },
-    { name: 'Write', share: 3.1 },
-    { name: 'Other', share: 2.6 },
+    { name: 'Bash', share: 53.1 },
+    { name: 'Edit', share: 20.5 },
+    { name: 'Read', share: 16.9 },
+    { name: 'Browser', share: 3.5 },
+    { name: 'Other', share: 3.1 },
+    { name: 'Write', share: 2.9 },
   ],
   workflows: [
     {
@@ -290,19 +290,76 @@ export const skills = [
   { group: 'Security', items: ['Single Sign-On', 'JWT HS-256 / RS-256', 'Role-Based Access Control'] },
   {
     group: 'AI',
-    items: ['LLM Integration', 'Prompt Engineering', 'OpenAI API', 'Claude Code', 'AI-Assisted Development'],
+    items: [
+      'LLM Integration',
+      'Prompt Engineering',
+      'Azure OpenAI',
+      'GPT-4o / GPT-4.1 mini',
+      'Google Gemini',
+      'Vision Analysis',
+      'Real-Time & Batch Inference',
+      'Claude Code',
+      'AI-Assisted Development',
+    ],
   },
   { group: 'Practices', items: ['System Design', 'Performance Optimization', 'Agile / Scrum', 'Code Reviews'] },
   { group: 'Core', items: ['Debugging & Problem-Solving', 'Data Structures & Algorithms', 'Communication'] },
 ];
 
 export const marquee = [
-  ['React', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'Tailwind CSS', 'Redux'],
-  ['Azure', 'MySQL', 'MongoDB', 'SSO', 'RBAC', 'LLM Integration', 'Claude Code'],
+  [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'JavaScript',
+    'Redux',
+    'Tailwind CSS',
+    'Bootstrap',
+    'HTML5',
+    'CSS3',
+    'Responsive Design',
+    'Node.js', 'Express', 'REST APIs', 'MongoDB', 'MySQL', 'MSSQL', 'Sequelize', 'SQL', 'Java'
+  ],
+  ['Azure', 'App Service', 'Application Insights', 'CI/CD', 'Git', 'GitHub', 'SSO', 'JWT', 'RBAC'],
+  [
+    'LLM Integration',
+    'Prompt Engineering',
+    'Azure OpenAI',
+    'GPT-4o',
+    'Google Gemini',
+    'Vision Analysis',
+    'Batch Inference',
+    'Claude Code',
+    'System Design',
+    'Code Reviews',
+  ],
 ];
 
-export const education = {
-  degree: 'Bachelor of Technology (B.Tech)',
-  school: 'AKGEC, Ghaziabad',
-  period: 'Aug 2019 – Jul 2023',
+export type EducationItem = {
+  label: string;
+  title: string;
+  /** Institution, when the title is a qualification and not the school itself. */
+  school?: string;
+  period?: string;
 };
+
+export const education: EducationItem[] = [
+  {
+    label: 'Education',
+    title: 'Bachelor of Technology (B.Tech)',
+    school: 'AKGEC, Ghaziabad',
+    period: 'Aug 2019 – Jul 2023',
+  },
+  { 
+    label: 'Intermediate', 
+    title: 'City Montessori School',
+    school: 'Lucknow',
+    period: 'Apr 2018 – Mar 2019', 
+  },
+  { 
+    label: 'High School', 
+    title: 'City Montessori School',
+    school: 'Lucknow',
+    period: 'Apr 2016 – Mar 2017', 
+  },
+];

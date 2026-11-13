@@ -17,14 +17,14 @@ function Terminal() {
 
       <div className="px-5 py-6 font-mono text-sm sm:px-7">
         <p className="text-faint"># what I ask for, most days</p>
-        <p className="mt-3 flex min-h-[3.25rem] items-start gap-2 text-fg">
+        <p className="mt-3 flex min-h-[8.75rem] sm:min-h-[5rem] items-start gap-2 text-fg">
           <span className="text-accent select-none">❯</span>
           <TextType
             as="span"
             text={claude.prompts}
-            typingSpeed={38}
-            deletingSpeed={18}
-            pauseDuration={1900}
+            typingSpeed={22}
+            deletingSpeed={8}
+            pauseDuration={2600}
             cursorCharacter="▍"
             cursorColor="#c6f24e"
             startOnVisible

@@ -32,6 +32,8 @@ export const seo = {
     'Single sign-on',
     'System design',
     'LLM integration',
+    'Azure OpenAI',
+    'Google Gemini',
     'AI-assisted development',
   ],
   /** Sections listed in the no-JavaScript fallback. */

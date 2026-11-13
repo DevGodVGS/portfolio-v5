@@ -1,4 +1,4 @@
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, School } from 'lucide-react';
 import { useReducedMotion } from 'motion/react';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import ScrollVelocity from '@/components/reactbits/ScrollVelocity';
@@ -23,7 +23,7 @@ export default function Skills() {
           <ScrollVelocity
             texts={marquee.map(row => row.map(item => `${item}${SEPARATOR}`).join(''))}
             velocity={40}
-            numCopies={4}
+            numCopies={3}
             fadeEdges
             outlineAlternate
             className="font-medium tracking-[-0.04em]"
@@ -52,23 +52,34 @@ export default function Skills() {
           ))}
         </AnimatedContent>
 
-        <AnimatedContent distance={30} duration={0.8}>
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 rounded-3xl border border-line bg-surface px-7 py-6">
-            <div className="flex items-center gap-4">
-              <span className="grid size-11 place-items-center rounded-full border border-line text-accent">
-                <GraduationCap size={20} aria-hidden="true" />
-              </span>
-              <div>
-                <p className="eyebrow !text-[10px] text-faint">Education</p>
-                <p className="mt-1 text-lg font-medium tracking-tight">{education.degree}</p>
+        <AnimatedContent distance={30} duration={0.8} className="mt-10 grid gap-4">
+          {education.map(item => (
+            <div
+              key={item.title}
+              className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 rounded-3xl border border-line bg-surface px-7 py-6"
+            >
+              <div className="flex items-center gap-4">
+                <span className="grid size-11 place-items-center rounded-full border border-line text-accent">
+                  {item.school ? (
+                    <GraduationCap size={20} aria-hidden="true" />
+                  ) : (
+                    <School size={20} aria-hidden="true" />
+                  )}
+                </span>
+                <div>
+                  <p className="eyebrow !text-[10px] text-faint">{item.label}</p>
+                  <p className="mt-1 text-lg font-medium tracking-tight">{item.title}</p>
+                </div>
               </div>
+              {item.school || item.period ? (
+                <p className="text-muted">
+                  {item.school}
+                  {item.school && item.period ? <span className="mx-3 text-line-strong">/</span> : null}
+                  {item.period ? <span className="font-mono text-sm">{item.period}</span> : null}
+                </p>
+              ) : null}
             </div>
-            <p className="text-muted">
-              {education.school}
-              <span className="mx-3 text-line-strong">/</span>
-              <span className="font-mono text-sm">{education.period}</span>
-            </p>
-          </div>
+          ))}
         </AnimatedContent>
       </div>
     </section>
