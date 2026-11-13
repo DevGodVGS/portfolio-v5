@@ -6,10 +6,10 @@
  * emitted once it is set.
  */
 export const seo = {
-  siteUrl: '',
+  siteUrl: 'https://vishwagauravshukla.vercel.app',
   name: 'Vishwa Gaurav Shukla',
   jobTitle: 'Full Stack Software Engineer',
-  title: 'Vishwa Gaurav Shukla · Full Stack Software Engineer',
+  title: 'Vishwa Gaurav Shukla | Full Stack Engineer (React, Node, AI)',
   description:
     'Vishwa Gaurav Shukla is a full-stack software engineer building scalable web applications and AI-powered products with React, Next.js, Node.js and Azure.',
   shareDescription:
@@ -21,6 +21,7 @@ export const seo = {
   employer: '98thPercentile',
   profiles: ['https://www.linkedin.com/in/vgs-profile'],
   resume: 'Vishwa-Gaurav-Shukla-Resume.pdf',
+  alumniOf: ['Ajay Kumar Garg Engineering College (AKGEC), Ghaziabad', 'City Montessori School'],
   knowsAbout: [
     'Full-stack web development',
     'React',
@@ -35,14 +36,5 @@ export const seo = {
     'Azure OpenAI',
     'Google Gemini',
     'AI-assisted development',
-  ],
-  /** Sections listed in the no-JavaScript fallback. */
-  sections: [
-    { id: 'about', label: 'About' },
-    { id: 'work', label: 'Work' },
-    { id: 'claude', label: 'Claude Code' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'contact', label: 'Contact' },
   ],
 };

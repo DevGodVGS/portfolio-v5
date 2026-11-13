@@ -3,7 +3,8 @@
  * the section components only handle layout and motion.
  */
 
-const asset = (file: string) => `${import.meta.env.BASE_URL}${file}`;
+// BASE_URL is undefined when this file is read by the build config, outside the app bundle.
+const asset = (file: string) => `${import.meta.env?.BASE_URL ?? '/'}${file}`;
 
 export const profile = {
   name: 'Vishwa Gaurav Shukla',
@@ -236,12 +237,14 @@ export type Project = {
   body: string;
   points: string[];
   tags: string[];
-  builtWithClaude?: boolean;
+  links?: { label: string; href: string }[];
+  /** Shown as a badge, for work that is not finished yet. */
+  status?: string;
 };
 
 export const projects: Project[] = [
   {
-    title: 'Dalal Desk',
+    title: 'Market Verdict',
     kicker: 'Multi-agent AI',
     body: 'A local dashboard where a panel of eight agents screens NSE stocks, a Bull and a Bear argue each pick, and a Judge issues a verdict with a confidence score.',
     points: [
@@ -250,7 +253,6 @@ export const projects: Project[] = [
       'Analysis only: no order-placing code anywhere',
     ],
     tags: ['Python', 'Flask', 'SQLite', 'Claude', 'Telegram'],
-    builtWithClaude: true,
   },
   {
     title: 'AI Cartoon Studio',
@@ -273,6 +275,157 @@ export const projects: Project[] = [
       'Leaves caches of apps that are currently running',
     ],
     tags: ['Node.js', 'macOS', 'launchd'],
+  },
+  {
+    title: 'Daily Job Hunter',
+    kicker: 'Scheduled agent',
+    body: 'A Node.js agent that scans job boards every morning for roles posted in the last 24 hours, scores each one against my résumé with Gemini, and sends me the shortlist.',
+    points: [
+      'Semantic résumé match score for every posting',
+      'Digest by HTML email and WhatsApp',
+      'Cron schedule with city, role and salary filters',
+    ],
+    tags: ['Node.js', 'Gemini API', 'node-cron', 'Nodemailer', 'Twilio'],
+  },
+  {
+    title: 'Trip Genie',
+    kicker: 'Web app',
+    body: 'A trip-planning front end: enter a destination, dates, budget and travel style, and get a day-by-day itinerary you can regenerate until it fits.',
+    points: [
+      'Guided trip form with travel-style presets',
+      'Day-by-day itinerary view with loading skeletons',
+      'Animated, responsive landing page',
+    ],
+    tags: ['React', 'Redux Toolkit', 'Bootstrap', 'Framer Motion'],
+    links: [{ label: 'Live demo', href: 'https://trip-genie-jade.vercel.app' }],
+  },
+  {
+    title: 'IP Tracker',
+    kicker: 'Network tool',
+    body: 'Look up any IP address and see its location, ISP and network details on a map, one at a time or in batches.',
+    points: [
+      'Bulk lookup of up to 20 addresses per batch',
+      'Search history, favourites and an analytics view',
+      'Export results to PDF, Excel or JSON',
+    ],
+    tags: ['React', 'TypeScript', 'TanStack Query', 'Recharts', 'OpenStreetMap'],
+  },
+  {
+    title: 'Documindr',
+    kicker: 'Full-stack app',
+    body: 'A document vault that tracks expiry dates for things like passports, licences and insurance, and emails a reminder before each one lapses.',
+    points: [
+      'Sign-in, file uploads and per-user storage on Supabase',
+      'Expired, critical and due-soon status for every document',
+      'Daily reminder job behind a secret-protected endpoint',
+    ],
+    tags: ['TanStack Start', 'TypeScript', 'Supabase', 'PostgreSQL', 'Cloudflare'],
+  },
+  {
+    title: 'Azure OpenAI Starter',
+    kicker: 'AI starter kit',
+    body: 'A chat interface wired to an Azure OpenAI deployment through a serverless function, so the API key never reaches the browser.',
+    points: [
+      'Chat completions against your own deployment',
+      'Supabase Edge Function as the backend',
+      'Loading, error and empty states handled',
+    ],
+    tags: ['React', 'TypeScript', 'Azure OpenAI', 'Supabase Edge Functions'],
+  },
+  {
+    title: 'Billify',
+    kicker: 'Invoice generator',
+    body: 'Fill in bill-to, ship-to and line items, pick a layout, and download a finished invoice or receipt as a PDF.',
+    points: [
+      'Multiple invoice and receipt templates',
+      'Automatic totals and currency formatting',
+      'PDF export in the browser, no server needed',
+    ],
+    tags: ['React', 'JavaScript', 'jsPDF', 'Tailwind CSS'],
+  },
+  {
+    title: 'SSO Portal',
+    kicker: 'Auth demo',
+    body: 'A single sign-on portal where one login opens a launcher of connected apps, built to explore session handling outside of work.',
+    points: [
+      'Email sign-in with Supabase Auth',
+      'Live session state with sign-out everywhere',
+      'App launcher with demo micro apps',
+    ],
+    tags: ['React', 'TypeScript', 'Supabase Auth', 'JWT'],
+  },
+  {
+    title: 'Market Pulse',
+    kicker: 'Dashboard UI',
+    body: 'A market dashboard with stocks, indices, currencies and news across several pages, running on simulated price data.',
+    points: [
+      'Stock cards with sparklines and detail charts',
+      'Markets, currencies, portfolio and analysis pages',
+      'Simulated live price movement',
+    ],
+    tags: ['React', 'TypeScript', 'Recharts', 'Tailwind CSS'],
+  },
+  {
+    title: 'Friday',
+    kicker: 'AI assistant',
+    status: 'In progress',
+    body: 'A personal AI assistant in the spirit of the one from the Iron Man films: something I can talk to that helps me get everyday work done.',
+    points: [
+      'Express server and React client wired end to end',
+      'Project structure and database connection in place',
+      'Next up: the assistant itself, with conversation and voice',
+    ],
+    tags: ['Node.js', 'Express', 'React', 'MongoDB'],
+  },
+  {
+    title: 'AI Nexus',
+    kicker: 'AI tools platform',
+    body: 'Five AI tools behind one sign-in: chat, content writing, code generation, image generation and text summarising, each backed by its own serverless function.',
+    points: [
+      'Landing page, pricing and a signed-in dashboard',
+      'One Supabase Edge Function per tool',
+      'Email sign-in with Supabase Auth',
+    ],
+    tags: ['React', 'TypeScript', 'Supabase', 'Edge Functions'],
+  },
+];
+
+/** Smaller builds, shown as a compact grid under the main project cards. */
+export const experiments = [
+  {
+    title: 'JARVIS',
+    body: 'A voice assistant interface that listens and talks back using the browser’s speech recognition and synthesis.',
+    tags: ['React', 'Web Speech API'],
+  },
+  {
+    title: 'AI Medico',
+    body: 'A symptom-checker prototype with sign-up and login screens, matching typed symptoms against sample conditions.',
+    tags: ['React', 'TypeScript'],
+  },
+  {
+    title: 'Quick Toolbox',
+    body: 'Everyday tools in one app: notes, tasks, a timer, a calculator and weather, with notes saved in the browser.',
+    tags: ['React', 'localStorage'],
+  },
+  {
+    title: 'Pomodoro Timer',
+    body: 'A focus timer with configurable work and break lengths, long-break cycles, session tracking and themes.',
+    tags: ['React', 'TypeScript'],
+  },
+  {
+    title: 'Capacity Planner',
+    body: 'Team capacity and availability charts broken down by role, with planned-role tables and Excel export.',
+    tags: ['React', 'Recharts', 'SheetJS'],
+  },
+  {
+    title: 'SocialPro',
+    body: 'A professional social feed prototype with posts, stories, likes and follow suggestions behind API routes.',
+    tags: ['React', 'TanStack Query'],
+  },
+  {
+    title: 'Play Grid',
+    body: 'A gaming dashboard with a games library, leaderboards, achievements and profile pages on sample data.',
+    tags: ['React', 'Redux Toolkit'],
   },
 ];
 
@@ -307,32 +460,8 @@ export const skills = [
 ];
 
 export const marquee = [
-  [
-    'React',
-    'Next.js',
-    'TypeScript',
-    'JavaScript',
-    'Redux',
-    'Tailwind CSS',
-    'Bootstrap',
-    'HTML5',
-    'CSS3',
-    'Responsive Design',
-    'Node.js', 'Express', 'REST APIs', 'MongoDB', 'MySQL', 'MSSQL', 'Sequelize', 'SQL', 'Java'
-  ],
-  ['Azure', 'App Service', 'Application Insights', 'CI/CD', 'Git', 'GitHub', 'SSO', 'JWT', 'RBAC'],
-  [
-    'LLM Integration',
-    'Prompt Engineering',
-    'Azure OpenAI',
-    'GPT-4o',
-    'Google Gemini',
-    'Vision Analysis',
-    'Batch Inference',
-    'Claude Code',
-    'System Design',
-    'Code Reviews',
-  ],
+  ['React', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'Tailwind CSS', 'Redux'],
+  ['Azure', 'MySQL', 'MongoDB', 'SSO', 'RBAC', 'LLM Integration', 'Claude Code'],
 ];
 
 export type EducationItem = {
@@ -350,16 +479,16 @@ export const education: EducationItem[] = [
     school: 'AKGEC, Ghaziabad',
     period: 'Aug 2019 – Jul 2023',
   },
-  { 
-    label: 'Intermediate', 
+  {
+    label: 'Intermediate',
     title: 'City Montessori School',
     school: 'Lucknow',
-    period: 'Apr 2018 – Mar 2019', 
+    period: 'Apr 2018 – Mar 2019',
   },
-  { 
-    label: 'High School', 
+  {
+    label: 'High School',
     title: 'City Montessori School',
     school: 'Lucknow',
-    period: 'Apr 2016 – Mar 2017', 
+    period: 'Apr 2016 – Mar 2017',
   },
 ];

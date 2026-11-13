@@ -3,6 +3,18 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type HtmlTagDescriptor, type Plugin } from 'vite'
 import { seo } from './seo.config.ts'
+import {
+  about,
+  claude,
+  education,
+  experience,
+  experiments,
+  leadership,
+  profile,
+  projects,
+  skills,
+  work,
+} from './src/data/profile.ts'
 
 /** Adds the head tags, structured data, robots.txt and sitemap.xml from seo.config.ts. */
 function seoPlugin(): Plugin {
@@ -23,6 +35,7 @@ function seoPlugin(): Plugin {
       worksFor: { '@type': 'Organization', name: seo.employer },
       sameAs: seo.profiles,
       knowsAbout: seo.knowsAbout,
+      alumniOf: seo.alumniOf.map(name => ({ '@type': 'EducationalOrganization', name })),
       ...(siteUrl ? { url: abs(), image: abs(seo.shareImage) } : {}),
     }
     const graph = [
@@ -47,14 +60,34 @@ function seoPlugin(): Plugin {
     return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')
   }
 
+  const esc = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const entry = (title: string, body: string, extra = '') =>
+    `<li><h3>${esc(title)}</h3><p>${esc(body)}</p>${extra ? `<p>${esc(extra)}</p>` : ''}</li>`
+
+  /** The page content as plain HTML, for crawlers and readers that do not run JavaScript. */
   const fallback = () =>
-    `<div style="max-width:40rem;margin:0 auto;padding:3rem 1.25rem;line-height:1.6">` +
-    `<h1>${seo.name}</h1><p><strong>${seo.jobTitle}</strong></p><p>${seo.description}</p>` +
-    `<ul>${seo.sections.map(s => `<li><a href="#${s.id}">${s.label}</a></li>`).join('')}</ul>` +
+    `<div style="max-width:44rem;margin:0 auto;padding:3rem 1.25rem;line-height:1.6">` +
+    `<h1>${esc(seo.name)}</h1><p><strong>${esc(seo.jobTitle)}</strong> · ${esc(profile.role)} at ${esc(profile.company)}</p>` +
+    `<p>${esc(profile.heroBody)}</p>` +
+    `<h2 id="about">About</h2><p>${esc(about.statement)}</p>` +
+    `<ul>${about.pillars.map(item => entry(item.title, item.body)).join('')}</ul>` +
+    `<h2 id="work">Work: ${esc(experience.role)}, ${esc(experience.company)} (${esc(experience.period)})</h2>` +
+    `<p>${esc(experience.intro)}</p>` +
+    `<ul>${work.map(item => entry(item.title, item.body, item.tags.join(', '))).join('')}` +
+    `${leadership.map(item => entry(item.title, item.body)).join('')}</ul>` +
+    `<h2 id="claude">AI-assisted engineering</h2><p>${esc(claude.intro)}</p>` +
+    `<ul>${claude.workflows.map(item => entry(item.title, item.body)).join('')}</ul>` +
+    `<h2 id="projects">Projects</h2>` +
+    `<ul>${projects.map(item => entry(item.title, item.body, item.tags.join(', '))).join('')}` +
+    `${experiments.map(item => entry(item.title, item.body, item.tags.join(', '))).join('')}</ul>` +
+    `<h2 id="skills">Skills</h2>` +
+    `<ul>${skills.map(group => `<li><strong>${esc(group.group)}:</strong> ${esc(group.items.join(', '))}</li>`).join('')}</ul>` +
+    `<h2>Education</h2>` +
+    `<ul>${education.map(item => `<li>${esc([item.title, item.school, item.period].filter(Boolean).join(', '))}</li>`).join('')}</ul>` +
+    `<h2 id="contact">Contact</h2>` +
     `<p><a href="mailto:${seo.email}">${seo.email}</a> · ` +
     seo.profiles.map(url => `<a href="${url}">LinkedIn</a>`).join(' · ') +
-    ` · <a href="${base}${seo.resume}">Résumé (PDF)</a></p>` +
-    `<p>This site needs JavaScript to show the full portfolio.</p></div>`
+    ` · <a href="${base}${seo.resume}">Résumé (PDF)</a></p></div>`
 
   return {
     name: 'seo',

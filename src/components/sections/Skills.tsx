@@ -23,7 +23,7 @@ export default function Skills() {
           <ScrollVelocity
             texts={marquee.map(row => row.map(item => `${item}${SEPARATOR}`).join(''))}
             velocity={40}
-            numCopies={3}
+            numCopies={4}
             fadeEdges
             outlineAlternate
             className="font-medium tracking-[-0.04em]"

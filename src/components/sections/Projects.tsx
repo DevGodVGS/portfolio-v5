@@ -1,9 +1,9 @@
-import { Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import BorderGlow from '@/components/reactbits/BorderGlow';
 import SectionHeading, { Accent } from '@/components/ui/SectionHeading';
 import { TagList } from '@/components/ui/Tag';
-import { projects } from '@/data/profile';
+import { experiments, projects } from '@/data/profile';
 
 export default function Projects() {
   return (
@@ -11,7 +11,7 @@ export default function Projects() {
       <SectionHeading
         index="04"
         label="Side projects"
-        lead="Things I build for myself: agents, pipelines and tools that run locally and do one job well."
+        lead="Things I build for myself: agents, pipelines, tools and the occasional web app, each made to do one job well."
       >
         Built after hours, <Accent>for the fun of it.</Accent>
       </SectionHeading>
@@ -31,9 +31,9 @@ export default function Projects() {
             <article className="flex h-full flex-col p-8">
               <header className="flex items-center justify-between gap-4">
                 <span className="eyebrow !text-[10px] text-faint">{project.kicker}</span>
-                {project.builtWithClaude ? (
-                  <span className="shrink-0 rounded-full bg-accent/10 px-2.5 py-1 font-mono text-[10px] whitespace-nowrap text-accent">
-                    Built with Claude Code
+                {project.status ? (
+                  <span className="shrink-0 rounded-full border border-line px-2.5 py-1 font-mono text-[10px] whitespace-nowrap text-muted">
+                    {project.status}
                   </span>
                 ) : null}
               </header>
@@ -48,8 +48,45 @@ export default function Projects() {
                 ))}
               </ul>
               <TagList items={project.tags} className="mt-auto pt-8" />
+              {project.links ? (
+                <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-5 text-sm">
+                  {project.links.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group inline-flex items-center gap-1 font-medium text-fg transition-colors hover:text-accent"
+                    >
+                      {link.label}
+                      <span className="sr-only"> for {project.title}</span>
+                      <ArrowUpRight
+                        size={15}
+                        className="text-muted transition-colors group-hover:text-accent"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ))}
+                </p>
+              ) : null}
             </article>
           </BorderGlow>
+        ))}
+      </AnimatedContent>
+
+      <h3 className="eyebrow mt-16 text-faint">Smaller experiments</h3>
+      <AnimatedContent
+        distance={30}
+        stagger={0.05}
+        duration={0.7}
+        className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {experiments.map(item => (
+          <article key={item.title} className="flex flex-col rounded-3xl border border-line bg-surface p-6">
+            <h4 className="text-lg font-medium tracking-tight">{item.title}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-pretty text-muted">{item.body}</p>
+            <TagList items={item.tags} className="mt-auto pt-5" />
+          </article>
         ))}
       </AnimatedContent>
     </section>
