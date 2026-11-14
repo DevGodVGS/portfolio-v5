@@ -17,6 +17,7 @@ export const profile = {
   linkedinUrl: 'https://www.linkedin.com/in/vgs-profile',
   linkedinLabel: 'linkedin.com/in/vgs-profile',
   resumeUrl: asset('Vishwa-Gaurav-Shukla-Resume.pdf'),
+  avatarUrl: asset('vishwa-portrait.webp'),
   heroLead: 'Full-stack engineer building',
   heroRotating: ['AI-powered products', 'scalable platforms', 'secure sign-on', 'design systems'],
   heroBody:
