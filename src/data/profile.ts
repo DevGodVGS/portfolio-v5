@@ -18,6 +18,7 @@ export const profile = {
   linkedinLabel: 'linkedin.com/in/vgs-profile',
   resumeUrl: asset('Vishwa-Gaurav-Shukla-Resume.pdf'),
   avatarUrl: asset('vishwa-portrait.webp'),
+  aboutImageUrl: asset('about-portrait.webp'),
   heroLead: 'Full-stack engineer building',
   heroRotating: ['AI-powered products', 'scalable platforms', 'secure sign-on', 'design systems'],
   heroBody:
@@ -116,6 +117,16 @@ export const work: WorkItem[] = [
       { value: '0%', label: 'unauthorized access incidents' },
     ],
     tags: ['Azure SSO', 'JWT HS-256 / RS-256', 'RBAC'],
+  },
+  {
+    title: 'Stripe payments & checkout windows',
+    kicker: 'Fintech · Payments',
+    body: 'Architected modal payment windows and end-to-end checkout flows integrated with Stripe for class enrollments. Built webhook event verification, idempotent transaction handling, failed payment recovery, and automated invoice delivery across student and parent portals.',
+    metrics: [
+      { value: '99.9%', label: 'webhook reliability' },
+      { value: '0', label: 'transaction discrepancies' },
+    ],
+    tags: ['Stripe API', 'Webhooks', 'React', 'Node.js', 'Express', 'MySQL'],
   },
   {
     title: 'Student learning platform',
@@ -435,13 +446,13 @@ export const skills = [
   { group: 'Frontend', items: ['React.js', 'Next.js', 'Redux', 'Tailwind CSS', 'Bootstrap', 'Responsive Design'] },
   {
     group: 'Backend & Databases',
-    items: ['Node.js', 'Express.js', 'RESTful APIs', 'MongoDB', 'MySQL', 'MSSQL', 'Sequelize ORM'],
+    items: ['Node.js', 'Express.js', 'RESTful APIs', 'Stripe API', 'MongoDB', 'MySQL', 'MSSQL', 'Sequelize ORM'],
   },
   {
     group: 'Cloud & DevOps',
     items: ['Azure', 'Azure App Service', 'Application Insights', 'CI/CD', 'Git', 'GitHub'],
   },
-  { group: 'Security', items: ['Single Sign-On', 'JWT HS-256 / RS-256', 'Role-Based Access Control'] },
+  { group: 'Security & Payments', items: ['Single Sign-On', 'JWT HS-256 / RS-256', 'Role-Based Access Control', 'Payment Security'] },
   {
     group: 'AI',
     items: [
@@ -462,7 +473,7 @@ export const skills = [
 
 export const marquee = [
   ['React', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'Tailwind CSS', 'Redux'],
-  ['Azure', 'MySQL', 'MongoDB', 'SSO', 'RBAC', 'LLM Integration', 'Claude Code'],
+  ['Azure', 'Stripe', 'MySQL', 'MongoDB', 'SSO', 'RBAC', 'LLM Integration', 'Claude Code'],
 ];
 
 export type EducationItem = {

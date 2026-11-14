@@ -18,7 +18,7 @@ export default function About() {
             <div className="group relative w-full max-w-sm md:max-w-none overflow-hidden rounded-2xl border border-line bg-surface/50 p-2 backdrop-blur transition-all duration-500 hover:border-line-strong hover:bg-surface/80 hover:shadow-[0_0_32px_-12px_rgb(198_242_78/0.18)]">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-ink/80">
                 <img
-                  src={profile.avatarUrl}
+                  src={profile.aboutImageUrl}
                   alt={profile.name}
                   width={960}
                   height={1200}
